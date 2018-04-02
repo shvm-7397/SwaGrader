@@ -4,4 +4,3 @@ from .models import *
 admin.site.register(Challenge)
 admin.site.register(Problem)
 admin.site.register(Submission)
-admin.site.register(UCT)
