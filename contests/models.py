@@ -59,9 +59,3 @@ class Submission(models.Model):
         return self.user.username + '__' + self.problem.problem_code + '__' + self.status
 
 
-class UCT(models.Model):
-    """ Model to represent user participation in a particular challenge with score """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, default=None)
-
-    score = models.IntegerField(default=0)
