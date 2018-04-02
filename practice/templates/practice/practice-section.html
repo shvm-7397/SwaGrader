@@ -1,0 +1,19 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Practice
+{% endblock %}
+
+{% block body %}
+    <h4>SwaGrader Practice</h4><br>
+    {% if problems %}
+        <ul>
+            {% for each in problems %}
+                <li>
+                    <a href="{% url 'practice:practice-problem' each.id %}">{{ each }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No problems right now</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block body %}
+    {% if current_user %}
+        <p>
+            Welcome {{current_user.username}}.
+            <br>
+            <table>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        User Handle
+                    </th>
+                    <th>
+                        College
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        {{current_user.profile.first_name}}
+                    </td>
+                    <td>
+                        {{current_user.profile.last_name}}
+                    </td>
+                    <td>
+                        {{current_user.username}}
+                    </td>
+                    <td>
+                        {{current_user.profile.college}}
+                    </td>
+                </tr>
+            </table>
+        </p>
+        <br>
+        <a href="{% url 'accounts:accounts-update' %}">Edit</a><br>
+        <a href="{% url 'accounts:accounts-logout' %}">Log Out</a><br>
+    {% else %}
+        <p>
+            Welcome!
+            <br>
+            <br>
+            <a href="{% url 'accounts:accounts-create' %}">Sign Up</a><br>
+            <a href="{% url 'accounts:accounts-login' %}">Login</a><br>
+        </p>
+    {% endif %}
+{% endblock %}

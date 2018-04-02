@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Response
+{% endblock %}
+
+{% block body %}
+    {% if current_user %}
+        <h5>User Logged in : {{ current_user }}</h5><br>
+        <h5>{{ problem }} from {{ current_challenge }}</h5><br>
+        <h5>Submission Status : {{ response }} </h5>
+    {% else %}
+        <h5>Not Authorized</h5>
+    {% endif %}
+{% endblock %}

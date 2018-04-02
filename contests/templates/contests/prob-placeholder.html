@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Problem
+{% endblock %}
+
+{% block body %}
+    <h5>Problems for {{ current_challenge }} </h5><br>
+    {% include problem.problem_file_url %}
+    {% if current_user %}
+        <br>
+        <h6>Submission</h6>
+         <form action="" method="post" enctype="multipart/form-data">
+             {% csrf_token %}
+             <label for="language">Language</label>
+             <select id="language" name="language-choice">
+                 <option value="cpp">cpp</option>
+                 <option value="c">c</option>
+                 <option value="python">python</option>
+             </select>
+             <br>
+             <label for="source-code">Upload File</label>
+             <input type="file" id="source-code" name="src-file">
+             <br>
+             <input type="submit" value="Submit">
+         </form>
+    {% endif %}
+{% endblock %}

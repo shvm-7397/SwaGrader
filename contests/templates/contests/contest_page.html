@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    Challenge
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for problem in contest.problem_set.all %}
+            <li>
+                <a href="{% url 'contests:contest-problem' contest.id problem.id %}">{{ problem }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    SwaGrader
+{% endblock %}
+
+{% block body %}
+    <h4>SwaGrader</h4><br>
+    {% if not current_user %}
+        <a href="{% url 'accounts:accounts-login' %}">Login</a><br>
+        <a href="{% url 'accounts:accounts-create' %}">SignUp</a><br>
+    {% else %}
+        <p>User Logged In : {{ current_user.username }}</p>
+        <a href="{% url 'practice:practice-home' %}">Practice</a><br>
+        <a href="{% url 'contests:contests-home' %}">Contests</a><br>
+        <a href="{% url 'accounts:accounts-home' %}">Profile</a><br>
+        <a href="{% url 'accounts:accounts-logout' %}">Logout</a><br>
+    {% endif %}
+{% endblock %}

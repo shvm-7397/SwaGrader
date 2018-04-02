@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+	LogIn
+{% endblock %}
+{% block body %}
+	<form action="{% url 'accounts:accounts-login' %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+        <label for="user_name">Username</label><br>
+        <input type="text" id="user_name" name="username"><br>
+        <label for="password">Password</label><br>
+        <input type="text" id="password" name="password"><br>
+		<input type="submit" name="log-in" value="Log In">
+	</form>
+{% endblock %}
