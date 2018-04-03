@@ -55,6 +55,7 @@ def problem_page(request, contest_id, pk):
                                         src_file_name=submission.source_file.name,
                                         language=submission.language)
         submission.status = context['response'] = result[0]
+        if submission.status == 'Accepted':
+            submission.score_achieved = submission.problem.score
         submission.save()
-
-        # Update score of the user in the particular contest, particular problem.
+        return render(request, 'contests/sub_response.html', context)

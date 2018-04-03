@@ -32,6 +32,7 @@ class Problem(models.Model):
     problem_name = models.CharField(max_length=50)
     problem_file_url = models.CharField(max_length=50)
     in_practice = models.BooleanField(default=False)
+    score = models.IntegerField(default=100)
 
     def __str__(self):
         return self.problem_code
@@ -54,6 +55,7 @@ class Submission(models.Model):
                       (CTE, 'Compile Time Error'), (CK, 'Checking'))
     status = models.CharField(max_length=20, choices=status_choices, default=CK)
     source_file = models.FileField()
+    score_achieved = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return self.user.username + '__' + self.problem.problem_code + '__' + self.status
