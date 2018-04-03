@@ -11,4 +11,6 @@
             </li>
         {% endfor %}
     </ul>
+    <br>
+    <a href="{% url 'contests:contest-ranklist' contest.id %}">Get Ranklist</a>
 {% endblock %}

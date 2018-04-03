@@ -59,3 +59,38 @@ def problem_page(request, contest_id, pk):
             submission.score_achieved = submission.problem.score
         submission.save()
         return render(request, 'contests/sub_response.html', context)
+
+
+def getranklist(request, pk):
+    challenge = Challenge.objects.get(id=pk)
+    all_acc_subs = Submission.objects.filter(problem__challenge__id=pk, status='Accepted')
+    prob_codes = []
+    for each in challenge.problem_set.all():
+        prob_codes.append(each.problem_code)
+    users = set()
+    for each in all_acc_subs:
+        users.add(each.user)
+    ranklist = []
+
+    for user in users:
+        score_card = {'user': user.username, 'total': 0}
+        for prob in prob_codes:
+            found = False
+            for sub in all_acc_subs:
+                if sub.problem.problem_code == prob and sub.user == user:
+                    found = True
+                    score_card[prob] = sub.score_achieved
+                    break
+            if not found:
+                score_card[prob] = 0
+        for prob in prob_codes:
+            score_card['total'] += score_card[prob]
+        ranklist.append(score_card)
+
+    ranklist.sort(reverse=True, key=lambda x : x['total'])
+    columns = ['Username'] + prob_codes + ['Total']
+    context = {
+        'ranklist': ranklist,
+        'column_header': columns,
+    }
+    return render(request, 'contests/ranklist.html', context)
