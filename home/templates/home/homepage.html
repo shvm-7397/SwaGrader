@@ -3,16 +3,39 @@
     SwaGrader
 {% endblock %}
 
+{% block navbar %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="{% url 'practice:practice-home' %}">Practice</a></li>
+        <li><a href="{% url 'contests:contests-home' %}">Contests</a></li>
+    </ul>
+    {% if not current_user %}
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'accounts:accounts-login' %}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        <li><a href="{% url 'accounts:accounts-create' %}"><span class="glyphicon glyphicon-grain"></span>SignUp</a></li>
+        </ul>
+    {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" ><span class="glyphicon glyphicon-user"></span>
+                    {{ current_user.username }}<span class="caret"></span>
+                    </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'accounts:accounts-home' %}">Profile</a></li>
+                  <li><a href="{% url 'accounts:accounts-logout' %}">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+
+{% endblock %}
+
+
+
 {% block body %}
     <h4>SwaGrader</h4><br>
-    {% if not current_user %}
-        <a href="{% url 'accounts:accounts-login' %}">Login</a><br>
-        <a href="{% url 'accounts:accounts-create' %}">SignUp</a><br>
-    {% else %}
-        <p>User Logged In : {{ current_user.username }}</p>
-        <a href="{% url 'practice:practice-home' %}">Practice</a><br>
-        <a href="{% url 'contests:contests-home' %}">Contests</a><br>
-        <a href="{% url 'accounts:accounts-home' %}">Profile</a><br>
-        <a href="{% url 'accounts:accounts-logout' %}">Logout</a><br>
-    {% endif %}
 {% endblock %}
+
+
+
