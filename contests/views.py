@@ -15,8 +15,11 @@ def index(request):
     context = {
         'active': active,
         'upcoming': upcoming,
-        'past': past
+        'past': past,
+        'current_user': None,
     }
+    if request.user.is_authenticated:
+        context['current_user'] = request.user
     return render(request, 'contests/index.html', context)
 
 

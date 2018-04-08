@@ -12,7 +12,23 @@
     </ul>
     {% if not current_user %}
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'accounts:accounts-login' %}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" ><span class="glyphicon glyphicon-log-in"></span>
+                    Login
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <form action="{% url 'accounts:accounts-login' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label for="user_name">Username</label><br>
+                            <input type="text" id="user_name" name="username"><br>
+                            <label for="password">Password</label><br>
+                            <input type="password" id="password" name="password"><br>
+                            <input type="submit" name="log-in" value="Log In">
+                        </form>
+                  </li>
+                </ul>
+            </li>
         <li><a href="{% url 'accounts:accounts-create' %}"><span class="glyphicon glyphicon-grain"></span>SignUp</a></li>
         </ul>
     {% else %}
@@ -30,17 +46,42 @@
     {% endif %}
 {% endblock %}
 
+
 {% block body %}
-    <h4>SwaGrader Practice</h4><br>
-    {% if problems %}
-        <ul>
-            {% for each in problems %}
-                <li>
-                    <a href="{% url 'practice:practice-problem' each.id %}">{{ each }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No problems right now</p>
-    {% endif %}
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <p><a href="#">Motivation</a></p>
+                <p><a href="#">Vision</a></p>
+                <p><a href="#">Future</a></p>
+                <p><a href="#">History</a></p>
+            </div>
+            <div class="col-sm-9 text-left">
+
+                <h4>SwaGrader Practice</h4><br>
+                {% if problems %}
+                    <ul>
+                        {% for each in problems %}
+                            <li>
+                                <a href="{% url 'practice:practice-problem' each.id %}">{{ each }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No problems right now</p>
+                {% endif %}
+
+            </div>
+            <div class="col-sm-1 sidenav">
+                <div class="well">
+                    <p>ADS</p>
+                </div>
+                <div class="well">
+                    <p>ADS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

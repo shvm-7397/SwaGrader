@@ -7,7 +7,12 @@ from swagrader.settings import BASE_DIR
 
 def practice_problems(request):
     """ Display all Practice Problems """
-    context = {'problems': Problem.objects.filter(in_practice=True)}
+    context = {
+        'problems': Problem.objects.filter(in_practice=True),
+        'current_user': None,
+    }
+    if request.user.is_authenticated:
+        context['current_user'] = request.user
     return render(request, "practice/practice-section.html", context)
 
 
