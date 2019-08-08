@@ -39,11 +39,19 @@
     </nav>
 
 
-    {% block body %}
+    {% block home %}
 
 
-	{% endblock %}
+    {% endblock %}
 
+    <div class="column">
+            {% block body %}
+
+            {% endblock %}
+                    
+    </div>        
+    
+    
     <footer class="container-fluid text-center">
         <div style="text-align: left;" class="col-sm-6">
             Shivam Sharma <br> +91 9519560707

@@ -48,7 +48,7 @@ body, html {
 /*.caption span.border {
   background-color: #111;
   color: #fff;
-  padding: 18px;
+   padding: 18px;        
   font-size: 25px;
   letter-spacing: 10px;
 }*/
@@ -71,11 +71,18 @@ body, html {
         background-color: black;
         color: white;
         padding: 15px;
-        position:relative;
+        position:fixed;
         bottom:0;
         width:100%;
 
     }
 
+    .column {
+        margin-top: 100px; 
+        float: left;
+        width: 100%;
+        padding: 15px;
+    }
+    
 
 
