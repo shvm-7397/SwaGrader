@@ -69,14 +69,10 @@ def problem_page(request, contest_id, pk):
 def getranklist(request, pk):
     challenge = Challenge.objects.get(id=pk)
     all_acc_subs = Submission.objects.filter(problem__challenge__id=pk, status='Accepted')
-    prob_codes = []
-    for each in challenge.problem_set.all():
-        prob_codes.append(each.problem_code)
-    users = set()
-    for each in all_acc_subs:
-        users.add(each.user)
+    prob_codes = [each.problem_code for each in challenge.problem_set.all()]
+    users = set([each.user for each in all_acc_subs])
+    
     ranklist = []
-
     for user in users:
         score_card = {'user': user.username, 'total': 0}
         for prob in prob_codes:
