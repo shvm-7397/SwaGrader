@@ -54,9 +54,11 @@ def problem_page(request, contest_id, pk):
         submission.status = 'Checking'
         submission.save()
 
-        result = falcon.eval_submission(problem_code=submission.problem.problem_code,
-                                        src_file_name=submission.source_file.name,
-                                        language=submission.language)
+        result = falcon.eval_submission(
+            problem_code=submission.problem.problem_code,
+            src_file_name=submission.source_file.name,
+            language=submission.language
+        )
         submission.status = context['response'] = result[0]
         if submission.status == 'Accepted':
             submission.score_achieved = submission.problem.score
